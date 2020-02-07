@@ -9,10 +9,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @ComponentScan ---> it tells Spring where to look to find our Spring components.
  * @EnableAutoConfiguration ---> specific for Spring Boot.
  */
-@SpringBootApplication
+@SpringBootApplication 
 public class MasterSpringMvcApplication {
 
 	public static void main(String[] args) {
+		System.out.println("=============== Dentro del MAIN ===============");
 		SpringApplication.run(MasterSpringMvcApplication.class, args);
 	}
 
