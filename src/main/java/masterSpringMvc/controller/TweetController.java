@@ -1,5 +1,8 @@
 package masterSpringMvc.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +13,7 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 import twitter4j.Query;
 import twitter4j.QueryResult;
+import twitter4j.Status;
 
 @Controller   // @RestController = @Controller + @ResponseBody
 public class TweetController {
@@ -21,7 +25,7 @@ public class TweetController {
 	public String searchTweets(@RequestParam(defaultValue = "spring") String search, Model model) {
         Twitter twitter = TwitterFactory.getSingleton(); // getTwitterInstance();
         Query query = new Query("source:twitter4j AlcalaJoser");
-        query.setQuery("liga");
+        query.setQuery("a");
         query.setCount(100);
         QueryResult result = null;
 		try {
@@ -30,8 +34,11 @@ public class TweetController {
 			System.out.println("========== Error al leer los mensajes ==========");
 			e.printStackTrace();
 		}
-        String text = result.getTweets().get(0).getText();
-		model.addAttribute("message", text);
+        List<Status> tweets = result.getTweets();
+//        		.stream()
+//        		.map(Status::getText)
+//        		.collect(Collectors.toList());
+		model.addAttribute("tweets", tweets);
 		return "resultPage";
 	}
 
