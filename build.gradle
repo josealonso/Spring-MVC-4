@@ -19,6 +19,12 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	implementation 'org.springframework.integration:spring-integration-core'
+//	implementation 'org.apache.commons:commons-csv'
+//	implementation 'org.twitter4j:twitter4j-core'
+	implementation 'org.twitter4j:twitter4j-stream:4.0.1'
+//	implementation 'org.springframework.social:spring-social-core:1.1.6.RELEASE'
+//	implementation "org.springframework.social:spring-social-twitter:1.1.6.RELEASE"
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
