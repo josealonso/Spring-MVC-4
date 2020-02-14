@@ -1,7 +1,7 @@
 package masterSpringMvc.controller;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,10 +22,10 @@ public class TweetController {
 //	private Twitter twitter;
 	
 	@RequestMapping("/")
-	public String searchTweets(@RequestParam(defaultValue = "spring") String search, Model model) {
-        Twitter twitter = TwitterFactory.getSingleton(); // getTwitterInstance();
+	public String searchTweets(@RequestParam(defaultValue = "a") String search, Model model) {
+        Twitter twitter = TwitterFactory.getSingleton(); 
         Query query = new Query("source:twitter4j AlcalaJoser");
-        query.setQuery("a");
+        query.setQuery(search);
         query.setCount(100);
         QueryResult result = null;
 		try {
@@ -35,10 +35,22 @@ public class TweetController {
 			e.printStackTrace();
 		}
         List<Status> tweets = result.getTweets();
+        List<String> list = new ArrayList<>();
+        List<String> imagesUrlsList = new ArrayList<>();
 //        		.stream()
 //        		.map(Status::getText)
-//        		.collect(Collectors.toList());
+//        		.collect(Collectors.toList());  // The collect method allows to call a terminal operation.
+        for (Status status: tweets) {
+        	imagesUrlsList.add(status.getUser().getOriginalProfileImageURL());
+        	list.add(status.getUser().getScreenName());
+        	list.add(status.getUser().getDescription());
+        	list.add(status.getUser().getLocation());
+        	list.add(status.getText());
+        	list.add("==========================================");
+        }
+        model.addAttribute("imagesurls", imagesUrlsList);
 		model.addAttribute("tweets", tweets);
+		model.addAttribute("search", search);
 		return "resultPage";
 	}
 
