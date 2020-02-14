@@ -18,10 +18,12 @@ import twitter4j.Status;
 @Controller   // @RestController = @Controller + @ResponseBody
 public class TweetController {
 	
-//	@Autowired               // Code for using the now deprecated spring social Twitter API
-//	private Twitter twitter;
-	
 	@RequestMapping("/")
+	public String home() {
+		return "searchPage";
+	}
+	
+	@RequestMapping("/result")
 	public String searchTweets(@RequestParam(defaultValue = "a") String search, Model model) {
         Twitter twitter = TwitterFactory.getSingleton(); 
         Query query = new Query("source:twitter4j AlcalaJoser");
