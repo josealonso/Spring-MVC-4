@@ -3,10 +3,14 @@ package masterSpringMvc.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -23,7 +27,7 @@ public class TweetController {
 		return "searchPage";
 	}
 	
-	@RequestMapping("/result")
+	@RequestMapping(value="/result")
 	public String searchTweets(@RequestParam(defaultValue = "a") String search, Model model) {
         Twitter twitter = TwitterFactory.getSingleton(); 
         Query query = new Query("source:twitter4j AlcalaJoser");
@@ -56,4 +60,15 @@ public class TweetController {
 		return "resultPage";
 	}
 
+	@RequestMapping(value="/postSearch", method = RequestMethod.POST)
+	public String postSearch(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+	    String search = request.getParameter("search");
+	    if (search.toLowerCase().contains("struts")) {
+	    	redirectAttributes.addFlashAttribute("error", "Try using spring instead");
+	    	return "redirect:/";
+	    }
+	    redirectAttributes.addAttribute("search", search);
+		return "redirect:result";
+	}
+	
 }
