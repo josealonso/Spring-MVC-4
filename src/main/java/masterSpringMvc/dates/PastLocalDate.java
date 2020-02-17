@@ -12,7 +12,7 @@ import javax.validation.Payload;
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = PastLocalDate.PastValidator.class)
 @Documented
-public @interface PastLocalDate {   // @interface, not interface
+public @interface PastLocalDate {   // @interface, not interface. "@interface" tells Java this is a custom annotation.
     String message() default "{javax.validation.constraints.Past.message}";
     
     Class<?>[] groups() default {};
