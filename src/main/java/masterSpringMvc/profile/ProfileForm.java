@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import masterSpringMvc.dates.PastLocalDate;
+
 // Data Transfer Object (DTO)
 @SuppressWarnings("deprecation")
 public class ProfileForm {
@@ -21,6 +23,7 @@ public class ProfileForm {
     private String email;
     
     @NotNull
+    @PastLocalDate
     private LocalDate birthDate;
     
     @NotEmpty
