@@ -6,17 +6,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.LocaleResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+//import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import java.time.LocalDate;
 
 
-@SuppressWarnings("deprecation")
+@EnableWebMvc
 @Configuration  // Class to customize the Spring MVC configuration
-public class WebConfiguration extends WebMvcConfigurerAdapter {
+public class WebConfiguration extends  WebMvcConfigurationSupport {  // WebMvcConfigurerAdapter {
 
 	@Override   
 	public void addFormatters(FormatterRegistry registry) {
@@ -29,7 +31,7 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
-	public LocaleChangeInterceptor LocaleChangeInterceptor() {
+	public LocaleChangeInterceptor localeChangeInterceptor() {
 		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
 		localeChangeInterceptor.setParamName("lang");
 		return localeChangeInterceptor;
@@ -37,6 +39,6 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(LocaleChangeInterceptor());
+		registry.addInterceptor(localeChangeInterceptor());
 	}
 }
