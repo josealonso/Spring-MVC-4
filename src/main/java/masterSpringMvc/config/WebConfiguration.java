@@ -16,9 +16,9 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import java.time.LocalDate;
 
 
-@EnableWebMvc
+// @EnableWebMvc
 @Configuration  // Class to customize the Spring MVC configuration
-public class WebConfiguration extends  WebMvcConfigurationSupport {  // WebMvcConfigurerAdapter {
+public class WebConfiguration extends WebMvcConfigurationSupport {  // WebMvcConfigurerAdapter {
 
 	@Override   
 	public void addFormatters(FormatterRegistry registry) {
